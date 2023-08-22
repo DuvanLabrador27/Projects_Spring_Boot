@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,5 +14,6 @@ public class ProductDTO {
     private Integer idProduct;
     private String productName;
     private Integer productQuantity;
-    private Double productPrice;
+    private BigDecimal productPrice;
+    private Boolean productState;
 }

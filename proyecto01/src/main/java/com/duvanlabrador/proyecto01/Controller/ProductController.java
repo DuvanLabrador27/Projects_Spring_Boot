@@ -48,7 +48,13 @@ public class ProductController {
     }
     @GetMapping("/productsThan")
     public List<ProductDTO> listProductGreaterThan(){
+
         return productService.listProductGraterThan();
+    }
+
+    @GetMapping("/productPrice")
+    public List<ProductDTO> listProductPriceGreaterThan(){
+        return productService.listProductPrice();
     }
 
     @PostMapping("/products")
@@ -75,6 +81,38 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @PutMapping("productsEnable/{id}")
+    public ResponseEntity<String> enableProduct(@PathVariable Integer id) {
+        try {
+            ProductDTO product = productService.findProductById(id);
+            if (product == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
+            }
+
+            productService.enableProduct(id);
+            return ResponseEntity.ok("The product has been enabled correctly");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Could not enable the product");
+        }
+    }
+
+    @PutMapping("productsDisable/{id}")
+    public ResponseEntity<String> disableProduct(@PathVariable Integer id){
+        try {
+            ProductDTO product = productService.findProductById(id);
+            if (product == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
+            }
+
+            productService.disableProduct(id);
+            return ResponseEntity.ok("The product has been disabled correctly");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Could not disable the product");
+        }
+    }
+
 
     @DeleteMapping("/products/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Integer id){

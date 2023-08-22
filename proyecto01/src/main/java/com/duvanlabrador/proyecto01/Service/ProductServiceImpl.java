@@ -51,6 +51,7 @@ public class ProductServiceImpl implements IProductService{
        productEntity.setProductName(product.getProductName());
        productEntity.setProductPrice(product.getProductPrice());
        productEntity.setProductQuantity(product.getProductQuantity());
+       productEntity.setProductState(product.getProductState());
        ProductEntity updateProduct = productRepository.save(productEntity);
        return mapToDTO(updateProduct);
     }
@@ -67,12 +68,27 @@ public class ProductServiceImpl implements IProductService{
         return productEntity.stream().map(product -> mapToDTO(product)).collect(Collectors.toList());
     }
 
+    @Override
+    public List<ProductDTO> listProductPrice() {
+        List<ProductEntity> productEntity = productRepository.listProductPrice();
+        return productEntity.stream().map(price -> mapToDTO(price)).collect(Collectors.toList());
+    }
+
+    public void enableProduct(Integer id) {
+        productRepository.enableProduct(id);
+    }
+
+    public void disableProduct(Integer id) {
+        productRepository.disableProduct(id);
+    }
+
     public ProductDTO mapToDTO(ProductEntity productEntity){
         ProductDTO product = new ProductDTO();
         product.setIdProduct(productEntity.getIdProduct());
         product.setProductName(productEntity.getProductName());
         product.setProductPrice(productEntity.getProductPrice());
         product.setProductQuantity(productEntity.getProductQuantity());
+        product.setProductState(productEntity.getProductState());
         return product;
     }
 
@@ -81,6 +97,7 @@ public class ProductServiceImpl implements IProductService{
         product.setProductName(productDTO.getProductName());
         product.setProductPrice(productDTO.getProductPrice());
         product.setProductQuantity(productDTO.getProductQuantity());
+        product.setProductState(productDTO.getProductState());
         return product;
     }
 }

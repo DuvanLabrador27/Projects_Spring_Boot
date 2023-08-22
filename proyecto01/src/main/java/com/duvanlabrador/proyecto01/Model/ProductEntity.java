@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +22,8 @@ public class ProductEntity {
     @Column(name = "product_quantity")
     private Integer productQuantity;
     @Column(name = "product_price")
-    private Double productPrice;
+    private BigDecimal productPrice;
+    @Column(name = "product_state")
+    private Boolean productState;
 
 }

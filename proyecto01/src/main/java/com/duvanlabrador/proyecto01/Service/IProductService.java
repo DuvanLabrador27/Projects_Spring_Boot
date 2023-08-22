@@ -13,4 +13,9 @@ public interface IProductService {
     public ProductDTO updateProduct(Integer id, ProductDTO product);
     public void deleteProduct(Integer id);
     public List<ProductDTO>  listProductGraterThan();
+    public List<ProductDTO> listProductPrice();
+    public void enableProduct(Integer id);
+    public void disableProduct(Integer id);
+
+
 }
